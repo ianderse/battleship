@@ -1,3 +1,4 @@
+
 class Ship
 
   attr_reader :type, :length, :location, :hits
@@ -18,9 +19,24 @@ class Ship
   end
 
   def set_coordinates(board)
-    board[coordinate_one(self.location)] = 'x'
-    board[coordinate_two(self.location)] = 'x'
-    board[coordinate_three(self.location)] = 'x'
+    #this is not working correctly
+    if (valid_placement(coordinate_one(self.location), board))
+      board[coordinate_one(self.location)] = self.type
+    else
+      return "invalid"
+    end
+
+    if (valid_placement(coordinate_two(self.location), board))
+      board[coordinate_two(self.location)] = self.type
+    else
+      return "invalid"
+    end
+
+    if (valid_placement(coordinate_three(self.location), board))
+      board[coordinate_three(self.location)] = self.type
+    else
+      return "invalid"
+    end
   end
 
   def coordinate_one(coordinates)
@@ -33,6 +49,10 @@ class Ship
 
   def coordinate_three(coordinates)
     coordinates.split(" ")[2]
+  end
+
+  def valid_placement(coordinate, board)
+    board[coordinate] == nil
   end
 
 end

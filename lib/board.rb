@@ -38,11 +38,6 @@ class Board
     Hash[hash.sort.map {|key, value| [key, value]}]
   end
 
-  def place_ship(location, size)
-    @p_ship_one = Ship.new('destroyer', size, location)
-    @p_ship_one.set_coordinates(@player_board)
-  end
-
   def print_player_map
     @messager.print_player_map(@player_board)
   end

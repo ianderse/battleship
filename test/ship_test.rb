@@ -41,7 +41,7 @@ class ShipTest < Minitest::Test
   end
 
   def test_a_ship_is_sunk_if_hits_equals_zero
-    @ship = Ship.new('test', 2, "A1 A2")
+    @ship = Ship.new('y', 2, "A1 A2")
     @ship.hit
     @ship.hit
 

@@ -20,9 +20,13 @@ class Messager
   def three_unit_ship
     @output.puts "Enter the squares for the three-unit ship:"
   end
-  
+
   def welcome
     @output.puts "Welcome to BATTLESHIP\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"
+  end
+
+  def invalid
+    @output.puts "invalid ship placement"
   end
 
   def input

@@ -39,12 +39,33 @@ class Battleship
     @new_game.setup
     @messager.print_intro
     @messager.two_unit_ship
-    @new_game.place_ship(@input.gets.chomp, 2)
+    # place_two_unit_ship
+    if place_two_unit_ship == "invalid"
+      @messager.invalid
+      place_two_unit_ship
+    end
+
+    @messager.three_unit_ship
+    #place_three_unit_ship
+    if place_three_unit_ship == "invalid"
+      @messager.invalid
+      place_three_unit_ship
+    end
 
     @new_game.print_player_map
     #@new_game.set_coordinates
     #while !@new_game.win?
     #end
+  end
+
+  def place_two_unit_ship
+    @pship_one = Ship.new('x', 2, @input.gets.chomp)
+    @pship_one.set_coordinates(@new_game.player_board)
+  end
+
+  def place_three_unit_ship
+    @pship_two = Ship.new('y', 3, @input.gets.chomp)
+    @pship_two.set_coordinates(@new_game.player_board)
   end
 
   def get_menu_option
