@@ -13,12 +13,30 @@ class Messager
     @output.puts "I have laid out my ships on the grid.\nYou now need to layout your two ships.\nThe first is two units long and the\nsecond is three units long.\nThe grid has A1 at the top left and D4 at the bottom right.\nEnter the squares for the two-unit ship:"
   end
 
-  def menu_input
-    @input.gets.chomp.downcase[0]
+  def welcome
+    @output.puts "Welcome to BATTLESHIP\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"
   end
 
   def input
     @input.gets.chomp.downcase
+  end
+
+  def print_player_map(board)
+    @output.puts "Your turn! Here's what you know:\n===========\n"
+    @output.puts ". 1 2 3 4"
+    @output.printf "A"
+    board.values.to_a[0..3].each {|pos| @output.printf " " + pos.to_s}
+    @output.printf "\nB"
+    board.values.to_a[4..7].each {|pos| @output.printf " " + pos.to_s}
+    @output.printf "\nC"
+    board.values.to_a[8..11].each {|pos| @output.printf " " + pos.to_s}
+    @output.printf "\nD"
+    board.values.to_a[12..15].each {|pos| @output.printf " " + pos.to_s}
+    @output.puts "\n===========\nEnter a coordinate to shoot at:"
+  end
+
+  def print_ai_map(board)
+    
   end
 
 end

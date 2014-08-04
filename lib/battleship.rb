@@ -19,7 +19,7 @@ class Battleship
   end
 
   def run_game#(choice) #for testing
-    @output.puts welcome
+    @messager.welcome
     choice ||= get_menu_option
 
     if choice == 'q'
@@ -30,20 +30,22 @@ class Battleship
       run_game
     elsif choice == 'p'
       play_game
+      return 0
     end
   end
 
   def play_game
     @new_game = Board.new(@input, @output)
     @new_game.setup
+
+    @new_game.print_player_map
+    @new_game.set_coordinates
+    #while !@new_game.win?
+    #end
   end
 
   def get_menu_option
-    @messager.menu_input
-  end
-
-  def welcome
-    "Welcome to BATTLESHIP\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"
+    @input.gets.chomp.downcase[0]
   end
 
 
