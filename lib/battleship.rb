@@ -8,10 +8,12 @@
 #   - don't directly talk to puts/gets, pass them into instance of Battleship
 
 require_relative 'board'
+require_relative 'messager'
 
 class Battleship
 
   def initialize(input, output)
+    @messager = Messager.new(input, output)
     @input = input
     @output = output
   end
@@ -24,7 +26,7 @@ class Battleship
       @output.puts "Thanks for playing."
       return 0
     elsif choice == 'i'
-      @output.puts print_instructions
+      @messager.print_instructions
       run_game
     elsif choice == 'p'
       play_game
@@ -37,11 +39,7 @@ class Battleship
   end
 
   def get_menu_option
-    @input.gets.chomp.downcase[0]
-  end
-
-  def print_instructions
-    "instructions"
+    @messager.menu_input
   end
 
   def welcome
