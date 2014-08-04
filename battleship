@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require_relative 'lib/battleship'
 
-battleship  = Battleship.new
+battleship  = Battleship.new($stdin, $stdout)
 exit_status = battleship.run_game
 exit exit_status
