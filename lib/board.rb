@@ -1,8 +1,9 @@
 require_relative 'messager'
+require_relative 'ship'
 
 class Board
 
-  attr_accessor :ai_board, :player_board
+  attr_reader :ai_board, :player_board
 
   def initialize(input, output)
     @messager = Messager.new(input, output)
@@ -37,17 +38,9 @@ class Board
     Hash[hash.sort.map {|key, value| [key, value]}]
   end
 
-  def set_ship_coordinates(coordinates, ship='x')
-    @player_board[coordinate_one(coordinates)] = ship
-    @player_board[coordinate_two(coordinates)] = ship
-  end
-
-  def coordinate_one(coordinates)
-    coordinates.split(" ")[0]
-  end
-
-  def coordinate_two(coordinates)
-    coordinates.split(" ")[1]
+  def place_ship(location, size)
+    @p_ship_one = Ship.new('destroyer', size, location)
+    @p_ship_one.set_coordinates(@player_board)
   end
 
   def print_player_map

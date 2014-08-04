@@ -38,7 +38,8 @@ class Battleship
     @new_game = Board.new(@input, @output)
     @new_game.setup
     @messager.print_intro
-    @new_game.set_ship_coordinates(@input.gets.chomp)
+    @messager.two_unit_ship
+    @new_game.place_ship(@input.gets.chomp, 2)
 
     @new_game.print_player_map
     #@new_game.set_coordinates
