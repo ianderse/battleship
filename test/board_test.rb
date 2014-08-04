@@ -54,8 +54,32 @@ class BoardTest < Minitest::Test
     assert_equal true, @board.player_turn?
   end
 
-  def test_it_can_set_coordinates
-    @board.set_coordinates("A1")
+  def test_it_can_get_first_coordinate
+    assert_equal "A1", @board.coordinate_one("A1 A2")
+  end
+
+  def test_it_can_get_second_coordinate
+    assert_equal "A2", @board.coordinate_two("A1 A2")
+  end
+
+  def test_it_can_set_ship_coordinates
+    #@ship = Ship.new('destroyer')
+    #@board.set_ship_coordinates("A1 A2", @ship)
+    @board.setup
+
+    @board.set_ship_coordinates("A1 A2")
+
+    assert_equal 'x', @board.player_board["A1"]
+    assert_equal 'x', @board.player_board["A2"]
+
+  end
+
+  def test_it_knows_a_ship_is_overlapping
+
+  end
+
+  def test_it_knows_coordinates_have_to_be_adjacent
+
   end
 
 end

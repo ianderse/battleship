@@ -6,14 +6,16 @@ class Board
 
   def initialize(input, output)
     @messager = Messager.new(input, output)
+    @input = input
+    @output = output
     @win_condition = false
     @player_turn = true
   end
 
   def setup
-    @messager.print_intro
     @ai_board = setup_board(4)
     @player_board = setup_board(4)
+
   end
 
   def setup_board(size)
@@ -35,8 +37,17 @@ class Board
     Hash[hash.sort.map {|key, value| [key, value]}]
   end
 
-  def set_coordinates(coordinate)
-    
+  def set_ship_coordinates(coordinates, ship='x')
+    @player_board[coordinate_one(coordinates)] = ship
+    @player_board[coordinate_two(coordinates)] = ship
+  end
+
+  def coordinate_one(coordinates)
+    coordinates.split(" ")[0]
+  end
+
+  def coordinate_two(coordinates)
+    coordinates.split(" ")[1]
   end
 
   def print_player_map

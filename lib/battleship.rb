@@ -37,9 +37,11 @@ class Battleship
   def play_game
     @new_game = Board.new(@input, @output)
     @new_game.setup
+    @messager.print_intro
+    @new_game.set_ship_coordinates(@input.gets.chomp)
 
     @new_game.print_player_map
-    @new_game.set_coordinates
+    #@new_game.set_coordinates
     #while !@new_game.win?
     #end
   end
