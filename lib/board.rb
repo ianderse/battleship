@@ -17,6 +17,7 @@ class Board
   def setup
     @ai_board = setup_board(4)
     randomize_ai_board
+    @displayed_ai_board = setup_board(4)
     @player_board = setup_board(4)
   end
 
@@ -53,9 +54,11 @@ class Board
 
     if @ai_board[coordinate] == 'x' || @ai_board[coordinate] == 'y'
       @ai_board[coordinate] = 'H'
+      @displayed_ai_board[coordinate] = 'H'
       hit_sequence(coordinate)
     elsif @ai_board[coordinate] == nil
       @ai_board[coordinate] = 'O'
+      @displayed_ai_board[coordinate] = 'O'
       @messager.miss
     elsif @ai_board[coordinate] == 'O' || @ai_board[coordinate] == 'H'
       @messager.repeat_shot
@@ -93,7 +96,7 @@ class Board
   end
 
   def print_player_map
-    @messager.print_player_map(@ai_board)
+    @messager.print_player_map(@displayed_ai_board)
   end
 
   def print_ai_map
