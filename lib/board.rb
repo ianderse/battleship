@@ -1,6 +1,8 @@
 require_relative 'messager'
 require_relative 'ship'
 
+#do i need AI board and displayed ai board? is there a reson to keep both?
+
 class Board
 
   attr_reader :ai_board, :player_board

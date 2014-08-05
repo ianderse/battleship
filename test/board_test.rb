@@ -51,7 +51,7 @@ class BoardTest < Minitest::Test
     @ship = Ship.new('x', 2, "A1 A2")
     @ship.set_coordinates(@board.ai_board)
     @board.player_shoot("A2")
-    assert_equal "Coordinate has already been shot at.", @board.player_shoot("A2")
+    assert_equal "invalid", @board.player_shoot("A2")
   end
 
   def test_win_condition_starts_false

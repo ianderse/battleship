@@ -54,29 +54,32 @@ class Battleship
     end
 
     while !@new_game.win?
-
-      @new_game.print_player_map
-      if player_shoot == "invalid"
-        player_shoot
+      if @new_game.player_turn?
+        @new_game.print_player_map
+        if player_shoot == "invalid"
+          player_shoot
+        end
+        @new_game.turn!
+      else
+        puts "CPU turn"
+        @new_game.turn!
       end
-
-      @new_game.turn!
     end
-    
+
   end
 
   def player_shoot
-    @new_game.player_shoot(@input.gets.strip)
+    @new_game.player_shoot(@input.gets.strip.upcase)
   end
 
   def place_two_unit_ship
-    @pship_one = Ship.new('x', 2, @input.gets.strip)
+    @pship_one = Ship.new('x', 2, @input.gets.strip.upcase)
     @p_armada << @pship_one
     @pship_one.set_coordinates(@new_game.player_board)
   end
 
   def place_three_unit_ship
-    @pship_two = Ship.new('y', 3, @input.gets.strip)
+    @pship_two = Ship.new('y', 3, @input.gets.strip.upcase)
     @p_armada << @pship_two
     @pship_two.set_coordinates(@new_game.player_board)
   end
