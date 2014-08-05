@@ -93,11 +93,11 @@ class Board
   end
 
   def print_player_map
-    @messager.print_player_map(@player_board)
+    @messager.print_player_map(@ai_board)
   end
 
   def print_ai_map
-    @messager.print_ai_map(@ai_board)
+    @messager.print_ai_map(@player_board)
   end
 
   def win?
