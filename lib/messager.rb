@@ -14,11 +14,11 @@ class Messager
   end
 
   def two_unit_ship
-    @output.puts "Enter the squares for the two-unit ship:"
+    @output.print "Enter the squares for the two-unit ship: "
   end
 
   def three_unit_ship
-    @output.puts "Enter the squares for the three-unit ship:"
+    @output.print "Enter the squares for the three-unit ship: "
   end
 
   def welcome
@@ -30,7 +30,7 @@ class Messager
   end
 
   def input
-    @input.gets.chomp.downcase
+    @input.gets.strip.downcase
   end
 
   def print_player_map(board)

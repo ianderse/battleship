@@ -16,7 +16,6 @@ class Board
   def setup
     @ai_board = setup_board(4)
     @player_board = setup_board(4)
-
   end
 
   def setup_board(size)

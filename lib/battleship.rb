@@ -59,17 +59,17 @@ class Battleship
   end
 
   def place_two_unit_ship
-    @pship_one = Ship.new('x', 2, @input.gets.chomp)
+    @pship_one = Ship.new('x', 2, @input.gets.strip)
     @pship_one.set_coordinates(@new_game.player_board)
   end
 
   def place_three_unit_ship
-    @pship_two = Ship.new('y', 3, @input.gets.chomp)
+    @pship_two = Ship.new('y', 3, @input.gets.strip)
     @pship_two.set_coordinates(@new_game.player_board)
   end
 
   def get_menu_option
-    @input.gets.chomp.downcase[0]
+    @input.gets.strip.downcase[0]
   end
 
 

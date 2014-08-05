@@ -19,7 +19,7 @@ class Ship
   end
 
   def set_coordinates(board)
-    #this is not working correctly
+    #this is not working correctly, is only working for first coordinate, not second or third
     if (valid_placement(coordinate_one(self.location), board))
       board[coordinate_one(self.location)] = self.type
     else
