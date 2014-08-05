@@ -12,8 +12,11 @@ class Board
     @input = input
     @output = output
     @win_condition = false
+    @cpu_win_condition = false
     @player_turn = true
     @ai_armada = []
+    @player_shot_counter = 0
+    @ai_shot_counter = 0
   end
 
   def setup
@@ -53,7 +56,7 @@ class Board
   end
 
   def player_shoot(coordinate)
-
+    @player_shot_counter += 1
     if @ai_board[coordinate] == 'x' || @ai_board[coordinate] == 'y'
       @ai_board[coordinate] = 'H'
       @displayed_ai_board[coordinate] = 'H'
@@ -70,8 +73,42 @@ class Board
   end
 
   def ai_shoot(armada)
-
+    @ai_shot_counter += 1
+    coordinate = @player_board.keys.sample
+    ai_check_board(armada, coordinate)
   end
+
+  def ai_hit_sequence(armada, coordinate)
+    #refactor this with player hit_sequence
+    armada.each do |ship|
+      if ship.location.split.include?(coordinate)
+        @messager.ai_hit
+        hit_ship(ship)
+        if ship.hits == 0
+          @messager.sunk_player_ship(ship)
+          armada.delete(ship)
+          if armada.size == 0
+            end_game_lose
+          end
+        end
+      end
+    end
+  end
+
+  def ai_check_board(armada, coordinate)
+    if @player_board[coordinate] == 'x' || @player_board[coordinate] == 'y'
+      @player_board[coordinate] = 'H'
+      ai_hit_sequence(armada, coordinate)
+    elsif @player_board[coordinate] == nil
+      @player_board[coordinate] = 'O'
+      @messager.ai_miss
+    end
+  end
+
+  def hit_ship(ship)
+    ship.hit
+  end
+
 
   def hit_sequence(coordinate)
     #for each ai ship see if it has a position that equals the coordinate that was hit,
@@ -80,7 +117,7 @@ class Board
     @ai_armada.each do |ship|
       if ship.location.split.include?(coordinate)
         @messager.hit
-        ship.hit
+        hit_ship(ship)
         if ship.hits == 0
           @messager.sunk_ship(ship)
           @ai_armada.delete(ship)
@@ -93,8 +130,13 @@ class Board
   end
 
   def end_game_win
-    @messager.win
+    @messager.win(@player_shot_counter)
     win!
+  end
+
+  def end_game_lose
+    @messager.lose(@ai_shot_counter)
+    cpu_win!
   end
 
   def print_player_map
@@ -109,8 +151,16 @@ class Board
     @win_condition
   end
 
+  def cpu_win?
+    @cpu_win_condition
+  end
+
   def win!
     @win_condition = true
+  end
+
+  def cpu_win!
+    @cpu_win_condition = true
   end
 
   def player_turn?

@@ -53,7 +53,7 @@ class Battleship
       place_three_unit_ship
     end
 
-    while !@new_game.win?
+    while !@new_game.win? || !@new_game.cpu_win? #this is not working
       if @new_game.player_turn?
         @new_game.print_player_map
         if player_shoot == "invalid"
@@ -61,7 +61,8 @@ class Battleship
         end
         @new_game.turn!
       else
-        puts "CPU turn"
+        @new_game.print_ai_map
+        ai_shoot
         @new_game.turn!
       end
     end
@@ -70,6 +71,10 @@ class Battleship
 
   def player_shoot
     @new_game.player_shoot(@input.gets.strip.upcase)
+  end
+
+  def ai_shoot
+    @new_game.ai_shoot(@p_armada)
   end
 
   def place_two_unit_ship
