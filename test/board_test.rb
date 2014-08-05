@@ -1,11 +1,13 @@
 gem 'minitest'
 require 'minitest/autorun'
 require_relative '../lib/board'
+require_relative '../lib/ship'
 
 class BoardTest < Minitest::Test
 
   def setup
     @board = Board.new($stdin, $stdout)
+    @board.setup
   end
 
   def test_it_can_setup_the_board_with_4x4_grid
@@ -30,6 +32,28 @@ class BoardTest < Minitest::Test
 
   end
 
+  def test_player_can_shoot
+    @ship = Ship.new('x', 2, "A1 A2")
+    @ship.set_coordinates(@board.ai_board)
+
+    assert_equal "Hit!", @board.player_shoot("A1")
+
+  end
+
+  def test_player_can_miss
+    @ship = Ship.new('x', 2, "A1 A2")
+    @ship.set_coordinates(@board.ai_board)
+
+    assert_equal 'Miss!', @board.player_shoot("A3")
+  end
+
+  def test_player_cannot_shoot_same_spot_twice
+    @ship = Ship.new('x', 2, "A1 A2")
+    @ship.set_coordinates(@board.ai_board)
+    @board.player_shoot("A2")
+    assert_equal "Coordinate has already been shot at.", @board.player_shoot("A2")
+  end
+
   def test_win_condition_starts_false
     assert_equal false, @board.win?
   end
@@ -52,26 +76,6 @@ class BoardTest < Minitest::Test
     @board.turn!
     @board.turn!
     assert_equal true, @board.player_turn?
-  end
-
-  def test_it_can_get_first_coordinate
-    assert_equal "A1", @board.coordinate_one("A1 A2")
-  end
-
-  def test_it_can_get_second_coordinate
-    assert_equal "A2", @board.coordinate_two("A1 A2")
-  end
-
-  def test_it_can_set_ship_coordinates
-    #@ship = Ship.new('destroyer')
-    #@board.set_ship_coordinates("A1 A2", @ship)
-    @board.setup
-
-    @board.set_ship_coordinates("A1 A2")
-
-    assert_equal 'x', @board.player_board["A1"]
-    assert_equal 'x', @board.player_board["A2"]
-
   end
 
   def test_it_knows_a_ship_is_overlapping

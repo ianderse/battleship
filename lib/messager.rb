@@ -7,6 +7,21 @@ class Messager
     @output = output
   end
 
+  def repeat_shot
+    output.puts "Coordinate has already been shot at, shoot again"
+  end
+
+  def miss
+    output.puts "Miss!"
+  end
+
+  def hit
+    output.puts "Hit!"
+  end
+
+  def sunk_ship(ship)
+    output.puts "You sunk your opponents size #{ship.length} ship!"
+  end
   def print_instructions
     output.puts "instructions"
   end
@@ -46,7 +61,13 @@ class Messager
     board.values.to_a[8..11].each {|pos| @output.printf " " + pos.to_s}
     output.printf "\nD"
     board.values.to_a[12..15].each {|pos| @output.printf " " + pos.to_s}
-    output.puts "\n===========\nEnter a coordinate to shoot at:"
+    output.print "\n===========\nEnter a coordinate to shoot at:"
+  end
+
+  def win(shots=0, time=0)
+    output.puts "Congratulations, you win!"
+    output.puts "It took you #{shots} to sink your opponents ships."
+    output.puts "You won in #{time}."
   end
 
   def print_ai_map(board)

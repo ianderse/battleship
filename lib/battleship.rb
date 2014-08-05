@@ -16,6 +16,7 @@ class Battleship
     @messager = Messager.new(input, output)
     @input = input
     @output = output
+    @p_armada = []
   end
 
   def run_game#(choice) #for testing
@@ -52,19 +53,31 @@ class Battleship
       place_three_unit_ship
     end
 
-    @new_game.print_player_map
-    #@new_game.set_coordinates
-    #while !@new_game.win?
-    #end
+    while !@new_game.win?
+
+      @new_game.print_player_map
+      if player_shoot == "invalid"
+        player_shoot
+      end
+
+      @new_game.turn!
+    end
+    
+  end
+
+  def player_shoot
+    @new_game.player_shoot(@input.gets.strip)
   end
 
   def place_two_unit_ship
     @pship_one = Ship.new('x', 2, @input.gets.strip)
+    @p_armada << @pship_one
     @pship_one.set_coordinates(@new_game.player_board)
   end
 
   def place_three_unit_ship
     @pship_two = Ship.new('y', 3, @input.gets.strip)
+    @p_armada << @pship_two
     @pship_two.set_coordinates(@new_game.player_board)
   end
 

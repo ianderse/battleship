@@ -47,4 +47,27 @@ class ShipTest < Minitest::Test
 
     assert_equal true, @ship.sunk?
   end
+
+  def test_it_can_get_first_coordinate
+    @ship = Ship.new('y', 2, "A1 A2")
+    assert_equal "A1", @ship.coordinate_one("A1 A2")
+  end
+
+  def test_it_can_get_second_coordinate
+    @ship = Ship.new('y', 2, "A1 A2")
+    assert_equal "A2", @board.coordinate_two("A1 A2")
+  end
+
+  def test_it_can_set_ship_coordinates
+    @ship = Ship.new('y', 2, "A1 A2")
+    @board = Board.new($stdin, $stdout)
+    @board.setup
+
+    @ship.set_coordinates(board)
+
+    assert_equal 'x', @board.player_board["A1"]
+    assert_equal 'x', @board.player_board["A2"]
+
+  end
+
 end
