@@ -1,3 +1,5 @@
+require 'colorize'
+
 class Messager
 
   attr_reader :output, :input
@@ -12,19 +14,19 @@ class Messager
   end
 
   def miss
-    output.puts "You Miss!"
+    output.puts "You Miss!".colorize(:green)
   end
 
   def ai_miss
-    output.puts "Computer Misses!"
+    output.puts "Computer Misses!".colorize(:green)
   end
 
   def hit
-    output.puts "You Hit!"
+    output.puts "You Hit!".colorize(:red)
   end
 
   def ai_hit
-    output.puts "Computer Hit!"
+    output.puts "Computer Hit!".colorize(:red)
   end
 
   def sunk_ship(ship)
@@ -54,11 +56,12 @@ class Messager
   end
 
   def welcome
+  
     output.puts "Welcome to BATTLESHIP\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"
   end
 
   def invalid
-    output.puts "invalid ship placement"
+    output.puts "invalid ship placement".colorize(:red)
   end
 
   def input
@@ -81,13 +84,13 @@ class Messager
     #need to fix this to display map correctly spaced with nil values
     output.puts ". 1 2 3 4"
     output.print "A"
-    board.values.to_a[0..3].each {|pos| @output.print " " + pos.to_s}
+    board.values.to_a[0..3].each {|pos| @output.print " " + pos.to_s.colorize(:cyan)}
     output.print "\nB"
-    board.values.to_a[4..7].each {|pos| @output.print " " + pos.to_s}
+    board.values.to_a[4..7].each {|pos| @output.print " " + pos.to_s.colorize(:cyan)}
     output.print "\nC"
-    board.values.to_a[8..11].each {|pos| @output.print " " + pos.to_s}
+    board.values.to_a[8..11].each {|pos| @output.print " " + pos.to_s.colorize(:cyan)}
     output.print "\nD"
-    board.values.to_a[12..15].each {|pos| @output.print " " + pos.to_s}
+    board.values.to_a[12..15].each {|pos| @output.print " " + pos.to_s.colorize(:cyan)}
   end
 
   def win(shots=0, time=0)

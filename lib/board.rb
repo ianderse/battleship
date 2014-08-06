@@ -48,7 +48,10 @@ class Board
     @ai_armada << @ai_ship_one
 
     @ai_ship_two = Ship.new('y', 3)
-    ship_b_first_position = @ai_board.keys.sample
+
+    #third ship can only start on A1, A2, B1, B2, C1, C2
+    #need to check if first position is taken or not
+    ship_b_first_position = find_third_start
     @ai_ship_two.set_individual_coordinate(@ai_board, ship_b_first_position)
     ship_b_second_position = get_next_position(ship_b_first_position)
     @ai_ship_two.set_individual_coordinate(@ai_board, ship_b_second_position)
@@ -62,15 +65,13 @@ class Board
     @ai_armada << @ai_ship_two
   end
 
-  #start with 3 ship
-    #as first condition:
-      #you know that position 1 can't be > than 2
-  def find_third_position(first, second)
-    if first[0] == second[0]
-      #then look in that row
+  def find_third_start
+    third_ship_start = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']
+    location = third_ship_start.sample
+    if @ai_board[location] != nil
+      find_third_start
     else
-      first[1] == second[1]
-      #then look in that column
+      return location
     end
   end
 
@@ -102,8 +103,10 @@ class Board
   end
 
   def get_position_above(first_position)
-    if @ai_board.keys.index(first_position-4) > 0
-      @ai_board.keys[first_position-4]
+    #bug here with first position - 4, change to previous position logic
+    previous_index = @ai_board.keys.index(first_position) -4
+    if previous_index > 0
+      @ai_board.keys[previous_index]
     end
   end
 
