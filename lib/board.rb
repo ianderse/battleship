@@ -49,7 +49,7 @@ class Board
 
     @ai_ship_two = Ship.new('y', 3)
 
-    #third ship can only start on A1, A2, B1, B2, C1, C2
+    #third ship can only start on A1, A2, B1, B2, C1, C2, D1, D2
     #need to check if first position is taken or not
     ship_b_first_position = find_third_start
     @ai_ship_two.set_individual_coordinate(@ai_board, ship_b_first_position)
@@ -66,7 +66,7 @@ class Board
   end
 
   def find_third_start
-    third_ship_start = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']
+    third_ship_start = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2']
     location = third_ship_start.sample
     if @ai_board[location] != nil
       find_third_start
@@ -85,7 +85,7 @@ class Board
   end
 
   def get_position_below(first_position)
-
+    #i know I could use key index value for this like the other ones, but this is hilarious
     if first_position.split('').rotate.join.succ.split('').rotate[0] >= 'E' || @ai_board[first_position.split('').rotate.join.succ.split('').rotate.join] != nil
       get_position_above(first_position)
     else
