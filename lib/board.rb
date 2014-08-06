@@ -1,12 +1,12 @@
 require_relative 'messager'
 require_relative 'ship'
-require_relative 'ai_placement'
+require_relative 'ai_behaviors'
 
 #do i need AI board and displayed ai board? is there a reson to keep both?
 # move out AI stuff into AiPlacement module
 
 class Board
-  include AiPlacement
+  include AiBehaviors
 
   attr_reader :ai_board, :player_board
 
@@ -63,42 +63,6 @@ class Board
       return "invalid"
     end
 
-  end
-
-  def ai_shoot(armada)
-    coordinate = @player_board.keys.sample
-    ai_check_board(armada, coordinate)
-  end
-
-  def ai_hit_sequence(armada, coordinate)
-    #refactor this with player hit_sequence
-    armada.each do |ship|
-      if ship.location.split.include?(coordinate)
-        @messager.ai_hit
-        hit_ship(ship)
-        if ship.hits == 0
-          @messager.sunk_player_ship(ship)
-          armada.delete(ship)
-          if armada.size == 0
-            end_game_lose
-          end
-        end
-      end
-    end
-  end
-
-  def ai_check_board(armada, coordinate)
-    if @player_board[coordinate] == 'x' || @player_board[coordinate] == 'y'
-      @player_board[coordinate] = 'H'
-      @ai_shot_counter += 1
-      ai_hit_sequence(armada, coordinate)
-    elsif @player_board[coordinate] == nil
-      @player_board[coordinate] = 'O'
-      @ai_shot_counter += 1
-      @messager.ai_miss
-    elsif @player_board[coordinate] == 'O'
-      ai_shoot(armada)
-    end
   end
 
   def hit_ship(ship)
