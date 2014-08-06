@@ -1,7 +1,8 @@
 
 class Ship
 
-  attr_reader :type, :length, :location, :hits
+  attr_reader :type, :length, :hits
+  attr_accessor :location
 
   def initialize(type, length, location="")
     @type = type
@@ -37,6 +38,10 @@ class Ship
     else
       return "invalid"
     end
+  end
+
+  def set_individual_coordinate(board, coordinate)
+    board[coordinate] = self.type
   end
 
   def coordinate_one(coordinates)

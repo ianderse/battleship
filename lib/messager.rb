@@ -66,21 +66,19 @@ class Messager
   end
 
   def print_player_map(board)
-    #need to fix this to display map correctly spaced with nil values
     output.puts "Your turn! Here's what you know:\n===========\n"
     print_grid(board)
     output.print "\n===========\nEnter a coordinate to shoot at:"
   end
 
   def print_ai_map(board)
-    #need to fix this to display map correctly spaced with nil values
-    #refactor with above
     output.puts "After my turn, here's your map:\n===========\n"
     print_grid(board)
     output.puts ""
   end
 
   def print_grid(board)
+    #need to fix this to display map correctly spaced with nil values
     output.puts ". 1 2 3 4"
     output.print "A"
     board.values.to_a[0..3].each {|pos| @output.print " " + pos.to_s}
