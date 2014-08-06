@@ -12,7 +12,7 @@ class Messager
   end
 
   def miss
-    output.puts "Miss!"
+    output.puts "You Miss!"
   end
 
   def ai_miss
@@ -20,7 +20,7 @@ class Messager
   end
 
   def hit
-    output.puts "Hit!"
+    output.puts "You Hit!"
   end
 
   def ai_hit
@@ -29,14 +29,12 @@ class Messager
 
   def sunk_ship(ship)
     output.puts "You sunk your opponents size #{ship.length} ship!"
-    output.puts "press enter to continue"
-    gets
+    sleep(0.5)
   end
 
   def sunk_player_ship(ship)
     output.puts "Computer sunk your size #{ship.length} ship!"
-    output.puts "press enter to continue"
-    gets
+    sleep(0.5)
   end
 
   def print_instructions
@@ -70,22 +68,19 @@ class Messager
   def print_player_map(board)
     #need to fix this to display map correctly spaced with nil values
     output.puts "Your turn! Here's what you know:\n===========\n"
-    output.puts ". 1 2 3 4"
-    output.print "A"
-    board.values.to_a[0..3].each {|pos| @output.print " " + pos.to_s}
-    output.print "\nB"
-    board.values.to_a[4..7].each {|pos| @output.print " " + pos.to_s}
-    output.print "\nC"
-    board.values.to_a[8..11].each {|pos| @output.print " " + pos.to_s}
-    output.print "\nD"
-    board.values.to_a[12..15].each {|pos| @output.print " " + pos.to_s}
+    print_grid(board)
     output.print "\n===========\nEnter a coordinate to shoot at:"
   end
 
   def print_ai_map(board)
     #need to fix this to display map correctly spaced with nil values
     #refactor with above
-    output.puts "My turn! Here's what your map:\n===========\n"
+    output.puts "After my turn, here's your map:\n===========\n"
+    print_grid(board)
+    output.puts ""
+  end
+
+  def print_grid(board)
     output.puts ". 1 2 3 4"
     output.print "A"
     board.values.to_a[0..3].each {|pos| @output.print " " + pos.to_s}
@@ -95,7 +90,6 @@ class Messager
     board.values.to_a[8..11].each {|pos| @output.print " " + pos.to_s}
     output.print "\nD"
     board.values.to_a[12..15].each {|pos| @output.print " " + pos.to_s}
-    output.puts ""
   end
 
   def win(shots=0, time=0)

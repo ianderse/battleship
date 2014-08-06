@@ -53,17 +53,19 @@ class Battleship
       place_three_unit_ship
     end
 
-    while !@new_game.win? || !@new_game.cpu_win? #this is not working
+    while !@new_game.someone_won?
       if @new_game.player_turn?
         @new_game.print_player_map
         if player_shoot == "invalid"
           player_shoot
         end
         @new_game.turn!
+        sleep(1)
       else
-        @new_game.print_ai_map
         ai_shoot
+        @new_game.print_ai_map
         @new_game.turn!
+        sleep(1)
       end
     end
 

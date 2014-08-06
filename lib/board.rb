@@ -73,7 +73,6 @@ class Board
   end
 
   def ai_shoot(armada)
-    @ai_shot_counter += 1
     coordinate = @player_board.keys.sample
     ai_check_board(armada, coordinate)
   end
@@ -98,10 +97,14 @@ class Board
   def ai_check_board(armada, coordinate)
     if @player_board[coordinate] == 'x' || @player_board[coordinate] == 'y'
       @player_board[coordinate] = 'H'
+      @ai_shot_counter += 1
       ai_hit_sequence(armada, coordinate)
     elsif @player_board[coordinate] == nil
       @player_board[coordinate] = 'O'
+      @ai_shot_counter += 1
       @messager.ai_miss
+    elsif @player_board[coordinate] == 'O'
+      ai_shoot(armada)
     end
   end
 
@@ -147,12 +150,8 @@ class Board
     @messager.print_ai_map(@player_board)
   end
 
-  def win?
-    @win_condition
-  end
-
-  def cpu_win?
-    @cpu_win_condition
+  def someone_won?
+    @win_condition || @cpu_win_condition
   end
 
   def win!
