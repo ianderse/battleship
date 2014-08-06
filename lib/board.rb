@@ -2,6 +2,7 @@ require_relative 'messager'
 require_relative 'ship'
 
 #do i need AI board and displayed ai board? is there a reson to keep both?
+# move out AI stuff into AiPlacement module
 
 class Board
 
@@ -76,15 +77,16 @@ class Board
   def get_next_position(first_position)
 
     if first_position.split('')[1].succ.to_i >= 5 || @ai_board[first_position.succ] != nil
-      get_position_below(first_position)
+      get_previous_position(first_position)
     else
       first_position.succ
     end
   end
 
   def get_position_below(first_position)
+
     if first_position.split('').rotate.join.succ.split('').rotate[0] >= 'E' || @ai_board[first_position.split('').rotate.join.succ.split('').rotate.join] != nil
-      get_previous_position(first_position)
+      get_position_above(first_position)
     else
       first_position.split('').rotate.join.succ.split('').rotate.join
     end
@@ -92,8 +94,8 @@ class Board
 
   def get_previous_position(first_position)
     previous_index = @ai_board.keys.index(first_position)-1
-    if previous_index < 0 || @ai_board[previous_index] != nil
-      get_position_above(first_position)
+    if previous_index < 0 || @ai_board[@ai_board.keys[previous_index]] != nil
+      get_position_below(first_position)
     else
       @ai_board.keys[previous_index]
     end
