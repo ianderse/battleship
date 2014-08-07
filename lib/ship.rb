@@ -21,7 +21,7 @@ class Ship
 
   def set_coordinates(board)
     #this is not working correctly, is only working for first coordinate, not second or third
-    #because it is not placing the previous location first
+    #because it is not placing the previous location first?
     if (valid_placement(coordinate_one(self.location), board))
       board[coordinate_one(self.location)] = self.type
     else

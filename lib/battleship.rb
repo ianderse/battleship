@@ -1,4 +1,4 @@
-#learning goals:
+#learning goals: (Feedback from Josh on Mastermind)
 #   distinguish the library from the binary
 #   - the library needs to be usable from *any* binary
 #     in *any* way, doesn't atually *do* anything
@@ -82,8 +82,8 @@ class Battleship
 
   def place_two_unit_ship
     #needs to validate that they are in a line
-    placement = @input.gets.strip.upcase
-    if (placement.size < 5 || placement.size > 5) || (!@valid_choices.include?(placement[0..1]) || !@valid_choices.include?(placement[3..4]))
+    placement = placement_input
+    if (placement.size < 5 || placement.size > 5) || (!@valid_choices.include?(placement[0..1]) || !@valid_choices.include?(placement[3..4])) || !check_adjacent(placement)
       @messager.invalid
       place_two_unit_ship
     end
@@ -94,7 +94,7 @@ class Battleship
 
   def place_three_unit_ship
     #needs to validate they they are in a line
-    placement = @input.gets.strip.upcase
+    placement = placement_input
     if (placement.size < 8 || placement.size > 8) || (!@valid_choices.include?(placement[0..1]) || !@valid_choices.include?(placement[3..4]) || !@valid_choices.include?(placement[6..7]))
       @messager.invalid
       place_three_unit_ship
@@ -104,8 +104,44 @@ class Battleship
     @pship_two.set_coordinates(@new_game.player_board)
   end
 
+  def placement_input
+    @input.gets.strip.upcase
+  end
+
   def get_menu_option
     @input.gets.strip.downcase[0]
+  end
+
+  def check_adjacent(coordinates)
+    if coordinates[0] != coordinates[3]
+      check_adjacent_vertical(coordinates)
+    elsif coordinates[1] != coordinates[4]
+      check_adjacent_horizontal(coordinates)
+    end
+  end
+
+  def check_adjacent_vertical(coordinates)
+    #split coordinates, if coordinate1[0] == coordinate2[0].succ then
+    #coordinates are adjacent, same with c1[1] == c2[1].succ
+    c1 = coordinates[0..1]
+    c2 = coordinates[3..4]
+
+    if c1[0].succ != c2[0]
+      false
+    else
+      true
+    end
+  end
+
+  def check_adjacent_horizontal(coordinates)
+    c1 = coordinates[0..1]
+    c2 = coordinates[3..4]
+
+    if c1[1].succ != c2[1]
+      false
+    else
+      true
+    end
   end
 
 end

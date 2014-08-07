@@ -70,4 +70,12 @@ class ShipTest < Minitest::Test
 
   end
 
+  def test_it_knows_a_ship_is_overlapping
+
+  end
+
+  def test_it_knows_coordinates_have_to_be_adjacent
+
+  end
+
 end
