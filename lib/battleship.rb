@@ -1,4 +1,4 @@
-#learning goals: (Feedback from Josh on Mastermind)
+#personal learning goals: (Feedback from Josh on Mastermind)
 #   distinguish the library from the binary
 #   - the library needs to be usable from *any* binary
 #     in *any* way, doesn't atually *do* anything

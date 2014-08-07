@@ -4,7 +4,6 @@ require_relative 'ai_behaviors'
 require_relative 'player_behaviors'
 
 #do i need AI board and displayed ai board? is there a reson to keep both?
-# move out AI stuff into AiPlacement module
 
 class Board
   include AiBehaviors
@@ -37,7 +36,7 @@ class Board
 
     letters = Array ('A'..'Z')
     hash = {}
-    
+
     size.times do |i|
       x = i+1
       y = letters[i]
