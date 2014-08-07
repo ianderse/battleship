@@ -1,8 +1,11 @@
 gem 'minitest'
 require 'minitest/autorun'
 require_relative '../lib/battleship'
+require_relative '../lib/player_placement'
 
 class BattleShipTest < Minitest::Test
+
+  include PlayerPlacement
 
   def setup
     @new_game = Battleship.new($stdin, $stdout)
@@ -27,6 +30,12 @@ class BattleShipTest < Minitest::Test
 
   def test_it_knows_coordinates_are_not_adjacent_horizontal
     assert_equal false, @new_game.check_adjacent_horizontal("A1 A3")
+  end
+
+  def test_it_knows_an_invalid_shot
+    #how to properly test modules?
+    skip
+    assert_equal false, @new_game.valid_choices.includ?("A5")
   end
 
 end
