@@ -61,12 +61,12 @@ class Battleship
           player_shoot
         end
         @new_game.turn!
-        sleep(1)
+        sleep(0.5)
       else
         ai_shoot
         @new_game.print_ai_map
         @new_game.turn!
-        sleep(1)
+        sleep(0.5)
       end
     end
     play_again

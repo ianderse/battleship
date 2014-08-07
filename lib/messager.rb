@@ -17,6 +17,7 @@ class Messager
   end
 
   def miss
+    system "clear"
     output.puts "You Miss!".colorize(:green)
   end
 
@@ -25,6 +26,7 @@ class Messager
   end
 
   def hit
+    system "clear"
     output.puts "You Hit!".colorize(:red)
   end
 
