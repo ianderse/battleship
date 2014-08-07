@@ -10,6 +10,7 @@ class Board
   include PlayerBehaviors
 
   attr_reader :ai_board, :player_board
+  attr_accessor :ai_board #for testing purposes
 
   def initialize(input, output)
     @messager = Messager.new(input, output)
@@ -27,7 +28,6 @@ class Board
 
   def setup
     @ai_board = setup_board(4)
-    randomize_ai_board
     @displayed_ai_board = setup_board(4)
     @player_board = setup_board(4)
   end

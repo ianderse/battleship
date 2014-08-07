@@ -42,6 +42,7 @@ class Battleship
     @p_armada = []
     @valid_choices = @new_game.setup_board(4).keys
     @new_game.setup
+    @new_game.randomize_ai_board
     @messager.print_intro
     @messager.two_unit_ship
     # place_two_unit_ship

@@ -1,16 +1,16 @@
 module PlayerBehaviors
 
-  def player_shoot(coordinate)
+  def player_shoot(coordinate, board=@ai_board) #board option here is for tests
     @player_shot_counter += 1
-    if @ai_board[coordinate] == 'x' || @ai_board[coordinate] == 'y'
-      @ai_board[coordinate] = 'H'
+    if board[coordinate] == 'x' || board[coordinate] == 'y'
+      board[coordinate] = 'H'
       @displayed_ai_board[coordinate] = 'H'
       hit_sequence(coordinate)
-    elsif @ai_board[coordinate] == nil
-      @ai_board[coordinate] = 'O'
+    elsif board[coordinate] == nil
+      board[coordinate] = 'O'
       @displayed_ai_board[coordinate] = 'O'
       @messager.miss
-    elsif @ai_board[coordinate] == 'O' || @ai_board[coordinate] == 'H'
+    elsif board[coordinate] == 'O' || board[coordinate] == 'H'
       @messager.repeat_shot
       return "invalid"
     end
@@ -40,5 +40,5 @@ module PlayerBehaviors
       end
     end
   end
-  
+
 end

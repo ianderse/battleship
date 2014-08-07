@@ -18,39 +18,25 @@ class BoardTest < Minitest::Test
     #               "D1"=>nil, "D2"=>nil, "D3"=>nil, "D4"=>nil}, @board.setup_board(4)
   end
 
-
-  def test_it_can_print_ai_map
-
-  end
-
-  def test_it_can_print_player_map
-    skip
-    player_map = @board.setup_board(4)
-    @board.print_player_map
-
-    assert_equal "Your turn! Here's what you know:\n===========\n. 1 2 3 4\nA\nB\nC\nD\n===========\nEnter a coordinate to shoot at:", @output
-
-  end
-
   def test_player_can_shoot
-    skip
     @ship = Ship.new('x', 2, "A1 A2")
-    @ship.set_coordinates(@board.ai_board)
+    @test_board = @board.setup_board(4)
+    @ship.set_coordinates(@test_board)
 
-    assert_equal "Hit!", @board.player_shoot("A1")
+    assert_equal @ship, @board.player_shoot("A1", @test_board)
 
   end
 
   def test_player_can_miss
-    skip
     @ship = Ship.new('x', 2, "A1 A2")
-    @ship.set_coordinates(@board.ai_board)
+    @test_board = @board.setup_board(4)
+    @ship.set_coordinates(@test_board)
 
-    assert_equal 'Miss!', @board.player_shoot("A3")
+    assert_equal nil, @board.player_shoot("A3", @test_board)
   end
 
   def test_player_cannot_shoot_same_spot_twice
-    skip
+
     @ship = Ship.new('x', 2, "A1 A2")
     @ship.set_coordinates(@board.ai_board)
     @board.player_shoot("A2")
@@ -58,14 +44,12 @@ class BoardTest < Minitest::Test
   end
 
   def test_win_condition_starts_false
-    skip
-    assert_equal false, @board.win?
+    assert_equal false, @board.someone_won?
   end
 
   def test_it_can_set_win_condition_to_true
-    skip
     @board.win!
-    assert_equal true, @board.win?
+    assert_equal true, @board.someone_won?
   end
 
   def test_it_is_players_turn_by_default

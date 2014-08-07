@@ -19,4 +19,13 @@ class MessagerTest < Minitest::Test
   def test_it_prints_welcome_message
     assert_equal "Welcome to BATTLESHIP\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?", @messager.welcome
   end
+
+  def test_it_can_print_player_map
+    skip
+    player_map = @board.setup_board(4)
+    @board.print_player_map
+
+    assert_equal "Your turn! Here's what you know:\n===========\n. 1 2 3 4\nA\nB\nC\nD\n===========\nEnter a coordinate to shoot at:", @output
+
+  end
 end
