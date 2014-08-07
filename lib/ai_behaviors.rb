@@ -6,7 +6,6 @@ module AiBehaviors
   end
 
   def ai_hit_sequence(armada, coordinate)
-    #refactor this with player hit_sequence
     armada.each do |ship|
       if ship.location.split.include?(coordinate)
         @messager.ai_hit
@@ -51,7 +50,7 @@ module AiBehaviors
     ship_a_next_position = get_next_position(ship_a_first_position)
     @ai_ship_one.set_individual_coordinate(@ai_board, ship_a_next_position)
 
-    puts ship_a_coordinates = "#{ship_a_first_position} #{ship_a_next_position}"
+    ship_a_coordinates = "#{ship_a_first_position} #{ship_a_next_position}"
 
     @ai_ship_one.location = ship_a_coordinates
     @ai_armada << @ai_ship_one
@@ -68,7 +67,7 @@ module AiBehaviors
     ship_b_third_position = get_next_position(ship_b_second_position)
     @ai_ship_two.set_individual_coordinate(@ai_board, ship_b_third_position)
 
-    puts ship_b_coordinates = "#{ship_b_first_position} #{ship_b_second_position} #{ship_b_third_position}"
+    ship_b_coordinates = "#{ship_b_first_position} #{ship_b_second_position} #{ship_b_third_position}"
 
     @ai_ship_two.location = ship_b_coordinates
     @ai_armada << @ai_ship_two
@@ -95,6 +94,7 @@ module AiBehaviors
 
   def get_position_below(first_position)
     #i know I could use key index value for this like the other ones, but this is hilarious
+    #the better way: previous_index = @ai_board.keys.index(first_position)+4
     if first_position.split('').rotate.join.succ.split('').rotate[0] >= 'E' || @ai_board[first_position.split('').rotate.join.succ.split('').rotate.join] != nil
       get_position_above(first_position)
     else
@@ -103,7 +103,7 @@ module AiBehaviors
   end
 
   def get_previous_position(first_position)
-    previous_index = @ai_board.keys.index(first_position)-1
+    previous_index = @ai_board.keys.index(first_position) - 1
     if previous_index < 0 || @ai_board[@ai_board.keys[previous_index]] != nil
       get_position_below(first_position)
     else
@@ -112,8 +112,7 @@ module AiBehaviors
   end
 
   def get_position_above(first_position)
-    #bug here with first position - 4, change to previous position logic
-    previous_index = @ai_board.keys.index(first_position) -4
+    previous_index = @ai_board.keys.index(first_position) - 4
     if previous_index > 0
       @ai_board.keys[previous_index]
     end

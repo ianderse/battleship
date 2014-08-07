@@ -56,7 +56,6 @@ class Messager
   end
 
   def welcome
-  
     output.puts "Welcome to BATTLESHIP\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"
   end
 
