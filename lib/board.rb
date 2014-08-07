@@ -1,12 +1,14 @@
 require_relative 'messager'
 require_relative 'ship'
 require_relative 'ai_behaviors'
+require_relative 'player_behaviors'
 
 #do i need AI board and displayed ai board? is there a reson to keep both?
 # move out AI stuff into AiPlacement module
 
 class Board
   include AiBehaviors
+  include PlayerBehaviors
 
   attr_reader :ai_board, :player_board
 
@@ -20,6 +22,7 @@ class Board
     @ai_armada = []
     @player_shot_counter = 0
     @ai_shot_counter = 0
+    @start_time = Time.now
   end
 
   def setup
@@ -48,54 +51,15 @@ class Board
     Hash[hash.sort.map {|key, value| [key, value]}]
   end
 
-  def player_shoot(coordinate)
-    @player_shot_counter += 1
-    if @ai_board[coordinate] == 'x' || @ai_board[coordinate] == 'y'
-      @ai_board[coordinate] = 'H'
-      @displayed_ai_board[coordinate] = 'H'
-      hit_sequence(coordinate)
-    elsif @ai_board[coordinate] == nil
-      @ai_board[coordinate] = 'O'
-      @displayed_ai_board[coordinate] = 'O'
-      @messager.miss
-    elsif @ai_board[coordinate] == 'O' || @ai_board[coordinate] == 'H'
-      @messager.repeat_shot
-      return "invalid"
-    end
-
-  end
-
-  def hit_ship(ship)
-    ship.hit
-  end
-
-
-  def hit_sequence(coordinate)
-    #for each ai ship see if it has a position that equals the coordinate that was hit,
-    #if it does, hit the ship (ship.hit), see if it sunk.
-
-    @ai_armada.each do |ship|
-      if ship.location.split.include?(coordinate)
-        @messager.hit
-        hit_ship(ship)
-        if ship.hits == 0
-          @messager.sunk_ship(ship)
-          @ai_armada.delete(ship)
-          if @ai_armada.size == 0
-            end_game_win
-          end
-        end
-      end
-    end
-  end
-
   def end_game_win
-    @messager.win(@player_shot_counter)
+    @finish_time = Time.now
+    @messager.win(@player_shot_counter, @start_time, @finish_time)
     win!
   end
 
   def end_game_lose
-    @messager.lose(@ai_shot_counter)
+    @finish_time = Time.now
+    @messager.lose(@ai_shot_counter, @start_time, @finish_time)
     cpu_win!
   end
 

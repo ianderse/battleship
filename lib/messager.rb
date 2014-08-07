@@ -1,6 +1,9 @@
 require 'colorize'
+require_relative 'time_helper'
 
 class Messager
+
+  include TimeHelper
 
   attr_reader :output, :input
 
@@ -92,16 +95,16 @@ class Messager
     board.values.to_a[12..15].each {|pos| @output.print " " + pos.to_s.colorize(:cyan)}
   end
 
-  def win(shots=0, time=0)
+  def win(shots=0, start, finish)
     output.puts "Congratulations, you win!"
     output.puts "It took you #{shots} shots to sink your opponents ships."
-    output.puts "You won in #{time}."
+    output.puts "You won in #{print_time_minutes(start, finish)} minutes and #{print_time_seconds(start, finish)} seconds."
   end
 
-  def lose(shots=0, time=0)
+  def lose(shots=0, start, finish)
     output.puts "You lose!"
     output.puts "It took your opponent #{shots} shots to sink your ships."
-    output.puts "You lost in #{time}."
+    output.puts "You lost in #{print_time_minutes(start, finish)} minutes and #{print_time_seconds(start, finish)} seconds."
   end
 
 end
