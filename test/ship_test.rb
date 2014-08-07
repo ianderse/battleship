@@ -1,6 +1,7 @@
 gem 'minitest'
 require 'minitest/autorun'
 require_relative '../lib/ship'
+require_relative '../lib/board'
 
 class ShipTest < Minitest::Test
 
@@ -55,7 +56,7 @@ class ShipTest < Minitest::Test
 
   def test_it_can_get_second_coordinate
     @ship = Ship.new('y', 2, "A1 A2")
-    assert_equal "A2", @board.coordinate_two("A1 A2")
+    assert_equal "A2", @ship.coordinate_two("A1 A2")
   end
 
   def test_it_can_set_ship_coordinates
@@ -63,18 +64,10 @@ class ShipTest < Minitest::Test
     @board = Board.new($stdin, $stdout)
     @board.setup
 
-    @ship.set_coordinates(board)
+    @ship.set_coordinates(@board.player_board)
 
-    assert_equal 'x', @board.player_board["A1"]
-    assert_equal 'x', @board.player_board["A2"]
-
-  end
-
-  def test_it_knows_a_ship_is_overlapping
-
-  end
-
-  def test_it_knows_coordinates_have_to_be_adjacent
+    assert_equal 'y', @board.player_board["A1"]
+    assert_equal 'y', @board.player_board["A2"]
 
   end
 
