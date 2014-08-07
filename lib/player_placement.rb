@@ -13,7 +13,7 @@ module PlayerPlacement
 
   def place_three_unit_ship
     placement = placement_input
-    if (placement.size < 8 || placement.size > 8) || (!@valid_choices.include?(placement[0..1]) || !@valid_choices.include?(placement[3..4]) || !@valid_choices.include?(placement[6..7])) || !check_adjacent(placement)
+    if (placement.size < 8 || placement.size > 8) || (!@valid_choices.include?(placement[0..1]) || !@valid_choices.include?(placement[3..4]) || !@valid_choices.include?(placement[6..7])) || !check_adjacent(placement, 3)
       @messager.invalid
       place_three_unit_ship
     end
@@ -22,11 +22,16 @@ module PlayerPlacement
     @pship_two.set_coordinates(@new_game.player_board)
   end
 
-  def check_adjacent(coordinates)
-    if coordinates[0] != coordinates[3]
-      check_adjacent_vertical(coordinates)
-    elsif coordinates[1] != coordinates[4]
-      check_adjacent_horizontal(coordinates)
+  def check_adjacent(coordinates,size=2)
+    if size == 2
+      if coordinates[0] != coordinates[3]
+        check_adjacent_vertical(coordinates)
+      elsif coordinates[1] != coordinates[4]
+        check_adjacent_horizontal(coordinates)
+      end
+    elsif size == 3
+      check_adjacent(coordinates[0..2], 2)
+      check_adjacent(coordinates[3..7], 2)
     end
   end
 

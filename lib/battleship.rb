@@ -83,7 +83,6 @@ class Battleship
     end
   end
 
-
   def player_shoot
     shot = placement_input
     if @valid_choices.include?(shot)
