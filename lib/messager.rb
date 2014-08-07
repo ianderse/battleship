@@ -51,11 +51,11 @@ class Messager
   end
 
   def two_unit_ship
-    output.print "Enter the squares for the two-unit ship: "
+    output.print "Enter adjacent squares for the two-unit ship: "
   end
 
   def three_unit_ship
-    output.print "Enter the squares for the three-unit ship: "
+    output.print "Enter adjacent squares for the three-unit ship: "
   end
 
   def welcome
@@ -73,7 +73,7 @@ class Messager
   end
 
   def play_again
-    output.puts "(P)lay again or (q)uit?"
+    output.puts "(P)lay again or (q)uit?".colorize(:cyan)
   end
 
   def input
@@ -112,7 +112,7 @@ class Messager
   end
 
   def lose(shots=0, start, finish)
-    output.puts "You lose!"
+    output.puts "You lose!".colorize(:red)
     output.puts "It took your opponent #{shots} shots to sink your ships."
     output.puts "You lost in #{print_time_minutes(start, finish)} minutes and #{print_time_seconds(start, finish)} seconds."
   end

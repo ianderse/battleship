@@ -22,6 +22,7 @@ class Board
     @ai_armada = []
     @player_shot_counter = 0
     @ai_shot_counter = 0
+    @finish_time = Time.now
     @start_time = Time.now
   end
 
@@ -36,6 +37,7 @@ class Board
 
     letters = Array ('A'..'Z')
     hash = {}
+    
     size.times do |i|
       x = i+1
       y = letters[i]
