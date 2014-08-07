@@ -106,7 +106,7 @@ class Messager
   end
 
   def win(shots=0, start, finish)
-    output.puts "That was your opponents last ship!!".colorize(:cyan)
+    output.puts "That was your opponents last ship!!".colorize(:green)
     output.puts "Congratulations, you win!".colorize(:cyan)
     output.puts "It took you #{shots} shots to sink your opponents ships."
     output.puts "You won in #{print_time_minutes(start, finish)} minutes and #{print_time_seconds(start, finish)} seconds."

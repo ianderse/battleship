@@ -1,7 +1,6 @@
 module PlayerPlacement
 
   def place_two_unit_ship
-
     placement = placement_input
     if (placement.size < 5 || placement.size > 5) || (!@valid_choices.include?(placement[0..1]) || !@valid_choices.include?(placement[3..4])) || !check_adjacent(placement)
       @messager.invalid
@@ -13,7 +12,6 @@ module PlayerPlacement
   end
 
   def place_three_unit_ship
-
     placement = placement_input
     if (placement.size < 8 || placement.size > 8) || (!@valid_choices.include?(placement[0..1]) || !@valid_choices.include?(placement[3..4]) || !@valid_choices.include?(placement[6..7])) || !check_adjacent(placement)
       @messager.invalid

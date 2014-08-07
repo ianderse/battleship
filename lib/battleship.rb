@@ -49,17 +49,13 @@ class Battleship
     @messager.print_intro
     @messager.two_unit_ship
     # place_two_unit_ship
-    if place_two_unit_ship == "invalid"
-      @messager.invalid
-      place_two_unit_ship
-    end
+
+    place_two_unit_ship
 
     @messager.three_unit_ship
     #place_three_unit_ship
-    if place_three_unit_ship == "invalid"
-      @messager.invalid
-      place_three_unit_ship
-    end
+
+    place_three_unit_ship
 
     while !@new_game.someone_won?
       if @new_game.player_turn?
