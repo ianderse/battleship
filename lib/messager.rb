@@ -13,7 +13,7 @@ class Messager
   end
 
   def repeat_shot
-    output.puts "Coordinate has already been shot at, shoot again"
+    output.puts "Coordinate has already been shot at, shoot again".colorize(:red)
   end
 
   def miss
@@ -33,17 +33,17 @@ class Messager
   end
 
   def sunk_ship(ship)
-    output.puts "You sunk your opponents size #{ship.length} ship!"
+    output.puts "You sunk your opponents size #{ship.length} ship!".colorize(:green)
     sleep(0.5)
   end
 
   def sunk_player_ship(ship)
-    output.puts "Computer sunk your size #{ship.length} ship!"
+    output.puts "Computer sunk your size #{ship.length} ship!".colorize(:red)
     sleep(0.5)
   end
 
   def print_instructions
-    output.puts "instructions"
+    output.puts "You have a grid from A1-D4, place a two unit ship and a three unit ship on the board.\nYour opponent will do the same.  You will alternate taking shots with your opponent, marking O for a miss and H for a hit.\nWhen a ship is fully hit, it is sunk.  When you sink all your opponents ships you win!"
   end
 
   def print_intro
@@ -71,13 +71,13 @@ class Messager
   end
 
   def print_player_map(board)
-    output.puts "Your turn! Here's what you know:\n===========\n"
+    output.puts "\nYour turn! Here's what you know:\n===========\n"
     print_grid(board)
     output.print "\n===========\nEnter a coordinate to shoot at:"
   end
 
   def print_ai_map(board)
-    output.puts "After my turn, here's your map:\n===========\n"
+    output.puts "\nAfter my turn, here's your map:\n===========\n"
     print_grid(board)
     output.puts ""
   end
@@ -96,7 +96,7 @@ class Messager
   end
 
   def win(shots=0, start, finish)
-    output.puts "Congratulations, you win!"
+    output.puts "Congratulations, you win!".colorize(:cyan)
     output.puts "It took you #{shots} shots to sink your opponents ships."
     output.puts "You won in #{print_time_minutes(start, finish)} minutes and #{print_time_seconds(start, finish)} seconds."
   end

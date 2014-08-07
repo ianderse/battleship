@@ -80,12 +80,14 @@ class Battleship
   end
 
   def place_two_unit_ship
+    #needs to validate that they are in a line
     @pship_one = Ship.new('x', 2, @input.gets.strip.upcase)
     @p_armada << @pship_one
     @pship_one.set_coordinates(@new_game.player_board)
   end
 
   def place_three_unit_ship
+    #needs to validate they they are in a line
     @pship_two = Ship.new('y', 3, @input.gets.strip.upcase)
     @p_armada << @pship_two
     @pship_two.set_coordinates(@new_game.player_board)
@@ -94,6 +96,5 @@ class Battleship
   def get_menu_option
     @input.gets.strip.downcase[0]
   end
-
 
 end

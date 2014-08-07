@@ -1,4 +1,5 @@
 module PlayerBehaviors
+
   def player_shoot(coordinate)
     @player_shot_counter += 1
     if @ai_board[coordinate] == 'x' || @ai_board[coordinate] == 'y'
@@ -39,4 +40,5 @@ module PlayerBehaviors
       end
     end
   end
+  
 end
