@@ -7,6 +7,9 @@
 #     the library provides to present it for that medium
 #   - don't directly talk to puts/gets, pass them into instance of Battleship
 
+
+#would have been better to take two coordinates for three unit ship and fill in missing unit
+
 require_relative 'board'
 require_relative 'messager'
 require_relative 'player_placement'
