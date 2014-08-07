@@ -53,11 +53,11 @@ class Messager
   end
 
   def two_unit_ship
-    output.print "Enter adjacent squares for the two-unit ship: "
+    output.print "Enter two adjacent squares for the two-unit ship (ie. A1 A2): "
   end
 
   def three_unit_ship
-    output.print "Enter adjacent squares for the three-unit ship: "
+    output.print "Enter three adjacent squares for the three-unit ship (ie. A1 A2 A3): "
   end
 
   def welcome
