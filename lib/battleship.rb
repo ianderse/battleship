@@ -7,6 +7,10 @@
 #     the library provides to present it for that medium
 #   - don't directly talk to puts/gets, pass them into instance of Battleship
 
+
+#known issue: when improperly placing a ship, causes next input to be invalid too,
+#next input then works
+
 require_relative 'board'
 require_relative 'messager'
 require_relative 'player_placement'
@@ -19,7 +23,6 @@ class Battleship
     @messager = Messager.new(input, output)
     @input = input
     @output = output
-    @p_armada = []
   end
 
   def run_game#(choice) #for testing
@@ -40,6 +43,7 @@ class Battleship
 
   def play_game
     @new_game = Board.new(@input, @output)
+    @p_armada = []
     @valid_choices = @new_game.setup_board(4).keys
     @new_game.setup
     @messager.print_intro
@@ -72,15 +76,41 @@ class Battleship
         sleep(1)
       end
     end
+    play_again
 
   end
 
+  def play_again
+    @messager.play_again
+    choice = get_menu_option
+    if choice == 'p'
+      play_game
+    else
+      return 0
+    end
+  end
+
+
   def player_shoot
-    @new_game.player_shoot(@input.gets.strip.upcase)
+    shot = placement_input
+    if @valid_choices.include?(shot)
+      @new_game.player_shoot(shot)
+    else
+      @messager.invalid_shot
+      return "invalid"
+    end
   end
 
   def ai_shoot
     @new_game.ai_shoot(@p_armada)
+  end
+
+  def get_menu_option
+    @input.gets.strip.downcase[0]
+  end
+
+  def placement_input
+    @input.gets.strip.upcase
   end
 
 end

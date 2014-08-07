@@ -1,7 +1,7 @@
 module PlayerPlacement
 
   def place_two_unit_ship
-    #needs to validate that they are in a line
+
     placement = placement_input
     if (placement.size < 5 || placement.size > 5) || (!@valid_choices.include?(placement[0..1]) || !@valid_choices.include?(placement[3..4])) || !check_adjacent(placement)
       @messager.invalid
@@ -13,7 +13,7 @@ module PlayerPlacement
   end
 
   def place_three_unit_ship
-    #needs to validate they they are in a line
+
     placement = placement_input
     if (placement.size < 8 || placement.size > 8) || (!@valid_choices.include?(placement[0..1]) || !@valid_choices.include?(placement[3..4]) || !@valid_choices.include?(placement[6..7])) || !check_adjacent(placement)
       @messager.invalid
@@ -22,14 +22,6 @@ module PlayerPlacement
     @pship_two = Ship.new('y', 3, placement)
     @p_armada << @pship_two
     @pship_two.set_coordinates(@new_game.player_board)
-  end
-
-  def placement_input
-    @input.gets.strip.upcase
-  end
-
-  def get_menu_option
-    @input.gets.strip.downcase[0]
   end
 
   def check_adjacent(coordinates)

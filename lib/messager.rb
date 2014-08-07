@@ -68,6 +68,14 @@ class Messager
     output.print "invalid ship placement, try again: ".colorize(:red)
   end
 
+  def invalid_shot
+    output.print "invalid shot, try again: ".colorize(:red)
+  end
+
+  def play_again
+    output.puts "(P)lay again or (q)uit?"
+  end
+
   def input
     input.gets.strip.downcase
   end
