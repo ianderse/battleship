@@ -59,11 +59,13 @@ class Messager
   end
 
   def welcome
-    output.puts "Welcome to BATTLESHIP\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"
+    system "clear"
+    output.puts "Welcome to BATTLESHIP".colorize(:cyan)
+    output.puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?".colorize(:green)
   end
 
   def invalid
-    output.puts "invalid ship placement".colorize(:red)
+    output.print "invalid ship placement, try again: ".colorize(:red)
   end
 
   def input

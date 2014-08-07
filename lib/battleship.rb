@@ -37,6 +37,7 @@ class Battleship
 
   def play_game
     @new_game = Board.new(@input, @output)
+    @valid_choices = @new_game.setup_board(4).keys
     @new_game.setup
     @messager.print_intro
     @messager.two_unit_ship
@@ -81,14 +82,24 @@ class Battleship
 
   def place_two_unit_ship
     #needs to validate that they are in a line
-    @pship_one = Ship.new('x', 2, @input.gets.strip.upcase)
+    placement = @input.gets.strip.upcase
+    if (placement.size < 5 || placement.size > 5) || (!@valid_choices.include?(placement[0..1]) || !@valid_choices.include?(placement[3..4]))
+      @messager.invalid
+      place_two_unit_ship
+    end
+    @pship_one = Ship.new('x', 2, placement)
     @p_armada << @pship_one
     @pship_one.set_coordinates(@new_game.player_board)
   end
 
   def place_three_unit_ship
     #needs to validate they they are in a line
-    @pship_two = Ship.new('y', 3, @input.gets.strip.upcase)
+    placement = @input.gets.strip.upcase
+    if (placement.size < 8 || placement.size > 8) || (!@valid_choices.include?(placement[0..1]) || !@valid_choices.include?(placement[3..4]) || !@valid_choices.include?(placement[6..7]))
+      @messager.invalid
+      place_three_unit_ship
+    end
+    @pship_two = Ship.new('y', 3, placement)
     @p_armada << @pship_two
     @pship_two.set_coordinates(@new_game.player_board)
   end
