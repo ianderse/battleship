@@ -7,10 +7,6 @@
 #     the library provides to present it for that medium
 #   - don't directly talk to puts/gets, pass them into instance of Battleship
 
-
-#known issue: when improperly placing a ship, causes next input to be invalid too,
-#next input then works
-
 require_relative 'board'
 require_relative 'messager'
 require_relative 'player_placement'
