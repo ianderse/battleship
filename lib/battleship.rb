@@ -95,7 +95,7 @@ class Battleship
   def place_three_unit_ship
     #needs to validate they they are in a line
     placement = placement_input
-    if (placement.size < 8 || placement.size > 8) || (!@valid_choices.include?(placement[0..1]) || !@valid_choices.include?(placement[3..4]) || !@valid_choices.include?(placement[6..7]))
+    if (placement.size < 8 || placement.size > 8) || (!@valid_choices.include?(placement[0..1]) || !@valid_choices.include?(placement[3..4]) || !@valid_choices.include?(placement[6..7])) || !check_adjacent(placement)
       @messager.invalid
       place_three_unit_ship
     end
